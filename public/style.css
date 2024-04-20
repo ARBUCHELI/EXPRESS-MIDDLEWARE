@@ -1,0 +1,120 @@
+html {
+    font-size: 16px;
+    min-width: 340px;
+  }
+  
+  body {
+    background: #ff9900;
+    padding: 1rem;
+    font-family: 'Ubuntu', sans-serif;
+  }
+  
+  h2 {
+    font-size: 1.75rem;
+    font-weight: bold;
+    margin-bottom: 1.5rem;
+    text-shadow: 1px 0px #adacac;
+  }
+  
+  .section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2rem;
+    border-radius: 4px;
+    margin-bottom: 2rem;
+    background: #eaeef3;
+    box-shadow: 5px 5px #a58181;
+  }
+  
+  .row {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+  }
+  
+  .row .element {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  form {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+  
+  select,
+  input {
+    max-width: 100px;
+    border: 1px solid #a58181;
+    margin-bottom: 1.2rem;
+    font-size: 1.2rem;
+  }
+  
+  input:focus,
+  select:focus,
+  button:focus {
+    outline: none;
+  }
+  
+  .title {
+    font-weight: bold;
+    font-size: 1.1rem;
+    text-align: center;
+    margin-bottom: .6rem;
+  }
+  
+  .field {
+    margin-bottom: .3rem;
+    text-align: center;
+  }
+  
+  button {
+    max-width: 150px;
+    border: 1px solid black;
+    border-radius: 4px;
+    padding: .75rem;
+    margin: auto;
+    background-color: white;
+    font-size: .75rem;
+    cursor: pointer;
+    transition: .25s;
+  }
+  
+  button:hover {
+    font-weight: bold;
+  }
+  
+  .response-box {
+    padding: .5rem;
+    background-color: white;
+    border: 1px solid #a58181;
+    line-height: 1.4;
+  }
+  
+  #status-code {
+    min-width: 150px;
+    min-height: 2rem;
+    padding: 1rem 0;
+    text-align: center;
+    font-weight: bold;
+    font-size: 1.4rem;
+  }
+  
+  #response-body {
+    min-width: 200px;
+    min-height: 50px;
+  }
+  
+  @media only screen and (max-width: 490px) {
+    #response .row {
+      flex-direction: column;
+      align-items: center;
+    }
+  
+    #status-code {
+      margin-bottom: 1rem;
+    }
+  }

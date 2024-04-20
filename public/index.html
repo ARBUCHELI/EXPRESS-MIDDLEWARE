@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Middleware</title>
+  <link rel="stylesheet" type="text/css" href="reset.css">
+  <link rel="stylesheet" type="text/css" href="style.css">
+  <link href="https://fonts.googleapis.com/css?family=Oswald:400,700" rel="stylesheet">
+</head>
+<body>
+  <div class="section">
+    <h2>Request</h2>
+    <form>
+      <div class="row">
+        <div class="element">
+          <label  class="title" for="verb">VERB</label>
+          <select id="verb" name="verb">
+            <option value="GET">GET</option>
+            <option value="POST">POST</option>
+            <option value="PUT">PUT</option>
+            <option value="DELETE">DELETE</option>
+          </select>
+        </div>
+        <div class="element">
+          <label class="title"for="path">PATH</label>
+          <input type="text" name="path" id="path" />
+        </div>
+      </div>
+      <label class="title">BODY</label>
+      <div class="row">
+        <div class="element">
+          <label class="field" for="name">name</label>
+          <input type="text" name="name" id="name">
+        </div>
+        <div class="element">
+          <label class="field" for="number">number</label>
+          <input type="number" name="number" id="number">
+        </div>
+      </div>
+      <button id="send-button">SEND REQUEST</button>
+    </form>
+  </div>
+  <div id="response" class="section">
+    <h2>Response</h2>
+    <div class="row">
+      <div class="element">
+        <h3 class="title">Status Code</h3>
+        <div id="status-code" class="response-box"></div>
+      </div>
+      <div class="element">
+        <h3 class="title">Response Body</h3>
+        <pre id="response-body" class="response-box"></pre>
+      </div>
+  </div>
+  <script
+    src="https://code.jquery.com/jquery-3.2.1.min.js"
+    integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+    crossorigin="anonymous"></script>
+  <script type="text/javascript" src="request.js"></script>
+</body>
+</html>
