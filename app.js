@@ -23,20 +23,16 @@ const jellybeanBag = {
   }
 };
 
-// Add your logging function here:
-const logRequest = verb => {
-  console.log(`${verb} Request Received`);
-}
-
+app.use((req, res, next) => {
+  console.log(`${req.method} Request Received`);
+});
 
 app.get('/beans/', (req, res, next) => {
-  logRequest("GET");
   res.send(jellybeanBag);
   console.log('Response Sent');
 });
 
 app.post('/beans/', (req, res, next) => {
-  logRequest("POST");
   let queryData = '';
   req.on('data', (data) => {
     queryData += data;
@@ -46,7 +42,7 @@ app.post('/beans/', (req, res, next) => {
     const body = JSON.parse(queryData);
     const beanName = body.name;
     if (jellybeanBag[beanName] || jellybeanBag[beanName] === 0) {
-      return res.status(400).send('Bag with that name already exists!');
+      return res.status(404).send('Bean with that name does not exist');
     }
     const numberOfBeans = Number(body.number) || 0;
     jellybeanBag[beanName] = {
@@ -58,7 +54,6 @@ app.post('/beans/', (req, res, next) => {
 });
 
 app.get('/beans/:beanName', (req, res, next) => {
-  logRequest("GET");
   const beanName = req.params.beanName;
   if (!jellybeanBag[beanName]) {
     console.log('Response Sent');
@@ -70,7 +65,6 @@ app.get('/beans/:beanName', (req, res, next) => {
 
 
 app.post('/beans/:beanName/add', (req, res, next) => {
-  logRequest("POST");
   const beanName = req.params.beanName;
   if (!jellybeanBag[beanName]) {
     return res.status(404).send('Bean with that name does not exist');
@@ -89,7 +83,6 @@ app.post('/beans/:beanName/add', (req, res, next) => {
 });
 
 app.post('/beans/:beanName/remove', (req, res, next) => {
-  logRequest("POST");
   const beanName = req.params.beanName;
   if (!jellybeanBag[beanName]) {
     return res.status(404).send('Bean with that name does not exist');
@@ -111,7 +104,6 @@ app.post('/beans/:beanName/remove', (req, res, next) => {
 });
 
 app.delete('/beans/:beanName', (req, res, next) => {
-  logRequest("DELETE");
   const beanName = req.params.beanName;
   if (!jellybeanBag[beanName]) {
     return res.status(404).send('Bean with that name does not exist');
@@ -122,7 +114,6 @@ app.delete('/beans/:beanName', (req, res, next) => {
 });
 
 app.put('/beans/:beanName/name', (req, res, next) => {
-  logRequest("PUT");
   const beanName = req.params.beanName;
   if (!jellybeanBag[beanName]) {
     return res.status(404).send('Bean with that name does not exist');
