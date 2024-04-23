@@ -26,21 +26,19 @@ const jellybeanBag = {
 // Logging Middleware
 app.use((req, res, next) => {
   console.log(`${req.method} Request Received`);
-  next();
+  next('Bag with that name does not exist');
 });
 
-// Add your code below:
 app.use('/beans/:beanName', (req, res, next) => {
   const beanName = req.params.beanName;
   if (!jellybeanBag[beanName]) {
-    console.log('Response Sent');
-    return res.status(404).send('Bean with that name does not exist');
+    res.status(404).send('Bag with that name does not exist');
+    return console.log('Response Sent');
   }
   req.bean = jellybeanBag[beanName];
   req.beanName = beanName;
   next();
 });
-
 
 app.get('/beans/', (req, res, next) => {
   res.send(jellybeanBag);
@@ -57,7 +55,7 @@ app.post('/beans/', (req, res, next) => {
     const body = JSON.parse(bodyData);
     const beanName = body.name;
     if (jellybeanBag[beanName] || jellybeanBag[beanName] === 0) {
-      return res.status(400).send('Bean with that name already exists!');
+      return res.status(404).send('Bag with that name already exists!');
     }
     const numberOfBeans = Number(body.number) || 0;
     jellybeanBag[beanName] = {
@@ -105,7 +103,7 @@ app.post('/beans/:beanName/remove', (req, res, next) => {
 });
 
 app.delete('/beans/:beanName', (req, res, next) => {
-  req.bean = null;
+  jellybeanBag[req.beanName] = null;
   res.status(204).send();
   console.log('Response Sent');
 });
@@ -118,7 +116,7 @@ app.put('/beans/:beanName/name', (req, res, next) => {
 
   req.on('end', () => {
     const newName = JSON.parse(bodyData).name;
-    jellybeanBag[newName] = jellybeanBag[req.beanName];
+    jellybeanBag[newName] = req.bean;
     jellybeanBag[req.beanName] = null;
     res.send(jellybeanBag[newName]);
     console.log('Response Sent');
